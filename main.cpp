@@ -9,10 +9,10 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string names[], string colors[]);
-void display_trip(list<Goat> trip);
+int select_goat(set<Goat> trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string names[], string colors[]);
+void display_trip(set<Goat> trip);
 
 int main_menu() {
     int choice = 0;
@@ -48,19 +48,19 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
     
-    list<Goat> myList;
+    set<Goat> mySet;
 
     int choice = 0;
     while (choice != 4) {
         choice = main_menu();
         if (choice == 1) {
-            add_goat(myList, names, colors);
+            add_goat(mySet, names, colors);
         }
         if (choice == 2) {
-            delete_goat(myList);
+            delete_goat(mySet);
         }
         if (choice == 3) {
-            display_trip(myList);
+            display_trip(mySet);
         }
     }
 
@@ -69,7 +69,8 @@ int main() {
     return 0;
 }
 
-void add_goat(list<Goat> &trip, string names[], string colors[]) {
+//This function adds a goat to the set and assigns random names and colors to these goats
+void add_goat(set<Goat> &trip, string names[], string colors[]) {
     int age = rand() % (MAX_AGE + 1);
     int idxcolor  = rand() % SZ_COLORS;
     int idxname = rand() % SZ_NAMES;
@@ -77,10 +78,11 @@ void add_goat(list<Goat> &trip, string names[], string colors[]) {
     temp.set_age(age);
     temp.set_color(colors[idxcolor]);
     temp.set_name(names[idxname]);
-    trip.push_back(temp);
+    trip.insert(temp);
 }
 
-void display_trip(list<Goat> trip) {
+//This function displays the current goats on the trip in a neat format
+void display_trip(set<Goat> trip) {
     int i = 1;
     for (Goat g : trip) {
         cout << "[" << i++ << "] " << g.get_name() << " (" << g.get_age() << ", " <<  g.get_color() <<")" << endl;
@@ -88,16 +90,17 @@ void display_trip(list<Goat> trip) {
     cout << endl;
 }
 
-int select_goat(list<Goat> trip) {
+//This function allows the user to select a goat from the set after displaying it
+int select_goat(set<Goat> trip) {
     int choice = 0;
-    cout << "Current list of goats: " << endl;
+    cout << "Current set of goats: " << endl;
     display_trip(trip);
     cout << "Select a goat by entering its index, then press enter: ";
     cin >> choice;
     return choice;
 }
 
-void delete_goat(list<Goat> &trip) {
+void delete_goat(set<Goat> &trip) {
    if (trip.empty()) {
     cout << "Empty list, no goats to delete" << endl;
     return;
