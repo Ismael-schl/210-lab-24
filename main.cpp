@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
 #include <set>
 #include "Goat.h"
 using namespace std;
@@ -19,7 +18,7 @@ int main_menu() {
     //Engine loop
     while (true) {
         cout << "*** GOAT MANAGER 3001 ***" << endl;
-        cout << "[1] Add a goat" << endl << "[2] Delete a goat" << endl << "[3] List goats" << endl << "[4] Quit" << endl;
+        cout << "[1] Add a goat" << endl << "[2] Delete a goat" << endl << "[3] Display set of goats" << endl << "[4] Quit" << endl;
         cout << "Choice --> ";
         cin >> choice;
         if (choice == 1 || choice == 2 || choice == 3 || choice == 4) {
@@ -100,9 +99,10 @@ int select_goat(set<Goat> trip) {
     return choice;
 }
 
+//This function allows the user to delete a goat from the set after displaying it. It considers the empty set case as well
 void delete_goat(set<Goat> &trip) {
    if (trip.empty()) {
-    cout << "Empty list, no goats to delete" << endl;
+    cout << "Empty set, no goats to delete" << endl;
     return;
    }
    int choice = select_goat(trip);
