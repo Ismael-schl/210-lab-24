@@ -1,8 +1,9 @@
-//Lab 23|COMSC 210|Ismael Hadi
+//Lab 24|COMSC 210|Ismael Hadi
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <set>
 #include "Goat.h"
 using namespace std;
 
